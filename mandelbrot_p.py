@@ -32,6 +32,8 @@ Running instructions:
         mpirun -np 3 python3 mandelbrot_p.py 512 512 -1.5 1.0 -1 1 200 1
 If parallel code shows some Darth Vader error:
     echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+
+#writing a comment just to check if branching works
 """
 
 from functions import *
