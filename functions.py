@@ -56,8 +56,6 @@ def change_colors(c, C):
         return numpy.cos(numpy.abs(C))
     elif c == 3:
         return numpy.log(numpy.abs(C))
-    elif c == 4:
-        return numpy.log2(numpy.log(C*40))
     else:
         print("Invalid color input! Assigning default color mode...")
         return C
