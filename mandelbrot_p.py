@@ -33,7 +33,6 @@ Running instructions:
 If parallel code shows some Darth Vader error:
     echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
 
-#writing a comment just to check if branching works
 """
 
 from functions import *
