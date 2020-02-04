@@ -5,13 +5,19 @@ import numpy
 
 
 def mandelbrot(x, y, maxit):
-    """Computes real and imaginary numbers, number of iterations
-    returns value of current iteration"""
+    """
+    Computes real and imaginary numbers, number of iterations
+    returns value of current iteration.
+    Takes input of x,y complex values and an int maximum iteration.
+    c is a part of Mandelbrot set only if the absolute value for
+    z is greater than 2 and if the function doesn't go to infinity
+    (does not diverge when iterated)
+    """
     c = x + y * 1j
     z = 0 + 0j
     it = 0
-    while abs(z) < 2 and it <maxit:
-        z = z**2 + c
+    while abs(z) < 2 and it < maxit:
+        z = z*z + c
         it += 1
     return it
 
@@ -45,7 +51,7 @@ def help_menu():
 
 
 def change_colors(c, C):
-    """ argument c calls a mathematical operation used
+    """ Argument c calls a mathematical operation used
     on argument C and returns a value. Used for graphing"""
     if c == 0:
         #defualt
@@ -63,7 +69,7 @@ def change_colors(c, C):
 import sys
 def progressbar(it, prefix="", size=60, file=sys.stdout):
     """
-    Prikazuje napredak izvedbe koda, nije jos implementirano.
+    Code progress bar, not implemented (yet)
     """
     count = len(it)
     def show(j):
