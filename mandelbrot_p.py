@@ -24,7 +24,7 @@ Test values:
     y1, y2 = -1.0, 1.0
     maxit  = 141
 
-Running instructions:
+Running instruction:
     Code runs in Linux terminal
     Structure:
         mpirun -np numProcesses mandelbrot_p.py width height x1 x2 y1 y2 maxit change_color
