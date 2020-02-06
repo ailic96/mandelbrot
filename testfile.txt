@@ -1,0 +1,18 @@
+TEST VALUES
+cmap = 'hot'
+
+1_m_p_hot_3
+mpirun -np 12 python3 mandelbrot_p.py 1024 1024 -0.74877 -0.74872 0.065053 0.065103 2048 3
+2_m_p_hot_3
+mpirun -np 12 python3 mandelbrot_p.py 1024 1024 -1.5 1.0 -1 1 2048 0
+3_m_p_hot_1
+mpirun -np 12 python3 mandelbrot_p.py 2048 1024 -0.25 0.00 -0.9 -0.8 500 1
+4_m_p_hot_0
+mpirun -np 12 python3 mandelbrot_p.py 2048 1024 -0.25 0.00 -0.9 -0.8 500 0
+
+plt.cm.gnuplot2
+5_m_p_obican_0
+mpirun -np 3 python3 mandelbrot_p.py 4096 4096 -0.75 -0.25 -0.7 -0.3 1000 0
+
+Sea horses:
+mpirun -np 5 python3 mandelbrot_p.py 2048 2048 -0.80 -0.75 0.05 0.15 1000 3
