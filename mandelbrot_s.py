@@ -23,12 +23,12 @@ Test values:
     y1, y2 = -1.0, 1.0
     maxit  = 141
 
-Running instructions:
+Running instruction:
     Code runs in Linux terminal
     Structure:
         python3 mandelbrot_s.py width height x1 x2 y1 y2 maxit change_color
     Example:
-        python3 mandelbrot_s.py 512 512 -1.5 1.0 -1 1 250 1
+        python3 mandelbrot_p.py 1024 1024 -0.74877 -0.74872 0.065053 0.065103 2048 3
 """
 from functions import *
 import time
@@ -37,12 +37,14 @@ from matplotlib import pyplot as plt
 import os
 import sys
 
-#makes using -h parameter possible by ignoring other parameters
+"""makes using -h parameter possible by ignoring other arguments.
+If there are more arguments, takes their input into compution
+"""
 if len(sys.argv) == 2:
    help_menu()
 else:
     width =  int(sys.argv[1])       #Image width
-    height =  int(sys.argv[2])       #Image height
+    height = int(sys.argv[2])       #Image height
     x1 = float(sys.argv[3])     #x axis minimum
     x2 = float(sys.argv[4])     #x axis maximum
     y1 = float(sys.argv[5])     #y axis minimum
@@ -54,9 +56,9 @@ else:
 print("Parameters:")
 print("\tOutput: ", os.path.relpath('mandelbrot_serial.png', start="./file.txt"))
 print("\tImage width: ", width)
-print("\tImage height: ", height)
-print("\tX-Axis minimum: ", x1)
-print("\tX-Axis maximum: ", x2)
+print("\tImage height:", height)
+print("\tX-Axis minimum:", x1)
+print("\tX-Axis maximum:", x2)
 print("\tY-Axis minimum: ", y1)
 print("\tY-Axis maximum: ", y2)
 print("\tIterations: ", maxit)
@@ -81,14 +83,12 @@ print("Computing finished in ", end - start, "seconds.")
 
 #Graphing
 print("Building image...")
-# https://matplotlib.org/api/_as_gen/matplotlib.pyplot.imshow.html
-# konfiguracija grafa, pozivanje funkcije za promjenu grafa, učitavanje varijabli x1,...y1 u graf
 plt.imshow(change_colors(c,C), aspect='equal', cmap=plt.cm.gnuplot2, interpolation='bilinear', extent=(x1, x2, y1, y2))
 plt.title('Mandelbrot set using serial computing')
 plt.xlabel('Real')
 plt.ylabel('Imaginary')
 
-plt.savefig('mandelbrot_serial.png', dpi=200)
+plt.savefig('mandelbrot_serial.png', dpi=1000)
 plt.show()
 
 #Relative path

@@ -6,7 +6,7 @@ Authors:
         Anton Ilic
 
 Description:
-        Computing of Mandelbrot set using mpi4py parallel computing
+            Computing of Mandelbrot set using mpi4py parallel computing
         Method:
             Blocking communication
 Data types:
@@ -29,10 +29,10 @@ Running instruction:
     Structure:
         mpirun -np numProcesses mandelbrot_p.py width height x1 x2 y1 y2 maxit change_color
     Example:
-        mpirun -np 3 python3 mandelbrot_p.py 512 512 -1.5 1.0 -1 1 200 1
+        mpirun -np 12 python3 mandelbrot_p.py 1024 1024 -0.74877 -0.74872 0.065053 0.065103 2048 3
+
 If parallel code shows some Darth Vader error:
     echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
-
 """
 
 from functions import *
@@ -42,7 +42,10 @@ import numpy as np                      #Used for arrays
 import os                               #Used for printing path
 import sys                              #Used for argument input
 
-#makes using -h parameter possible by ignoring other parameters
+"""makes using -h parameter possible by ignoring other arguments.
+If there are more arguments, takes their input into compution
+"""
+
 if len(sys.argv) == 2:
    help_menu()
 else:
@@ -83,15 +86,15 @@ counts = comm.gather(N, root=0)
 
 if rank == 0:
     print("Parameters:")
-    print("\tIterations: ", maxit)
     print("\tOutput: ", os.path.relpath('mandelbrot_parallel.png', start="./file.txt"))
     print("\tImage width: ", width)
-    print("\tImage height: ", height)
-    print("\tx1 value: ", x1)
-    print("\ty1 value: ", y1)
-    print("\tx2 value: ", x2)
-    print("\ty2 value: ", y2)
-    print("\nComputing...")
+    print("\tImage height:", height)
+    print("\tX-Axis minimum:", x1)
+    print("\tX-Axis maximum:", x2)
+    print("\tY-Axis minimum: ", y1)
+    print("\tY-Axis maximum: ", y2)
+    print("\tIterations: ", maxit)
+    print("Computing...")
 
     C = np.empty([height, width], dtype='i')
 
@@ -114,8 +117,8 @@ if rank == 0:
 
     # Graphing
     print("Building image...")
-    #https://matplotlib.org/api/_as_gen/matplotlib.pyplot.imshow.html
     #konfiguracija grafa, pozivanje funkcije za promjenu grafa, učitavanje varijabli x1,...y1 u graf
+    #cmap = plt.cm.gnuplot2, 'hot'
     plt.imshow(change_colors(c,C), aspect='equal',cmap=plt.cm.gnuplot2, interpolation='none', extent=(x1, x2, y1, y2))
 
     plt.title('Mandelbrot set using parallel computing')
@@ -127,6 +130,6 @@ if rank == 0:
 
     #Relative path
     path = os.path.relpath('mandelbrot_parallel.png', start="./file.txt")
-    print("Image saved in: ", path)
+    print("Image save path: ", path)
 
 MPI.COMM_WORLD.Barrier()

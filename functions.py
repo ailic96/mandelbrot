@@ -8,8 +8,11 @@ def mandelbrot(x, y, maxit):
     """
     Computes real and imaginary numbers, number of iterations
     returns value of current iteration.
-    Takes input of x,y complex values and an int maximum iteration.
-    c is a part of Mandelbrot set only if the absolute value for
+    Takes input of complex numbers:
+     x - real value
+     y - imaginary value
+     maxit -  maximum iteration.
+    z is a part of Mandelbrot set only if the absolute value for
     z is greater than 2 and if the function doesn't go to infinity
     (does not diverge when iterated)
     """
@@ -43,7 +46,8 @@ This code implements compution of Mandelbrot set\n\n
 
 
 def help_menu():
-    """ enables using -h as a help argument"""
+    """ Help function with instructions for running the code.
+     Enables using -h as a help argument"""
     parser = argparse.ArgumentParser(add_help=False)
     parser.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS,
                         help=help_text)
@@ -54,8 +58,7 @@ def change_colors(c, C):
     """ Argument c calls a mathematical operation used
     on argument C and returns a value. Used for graphing"""
     if c == 0:
-        #defualt
-        return C
+        return C            #defualt
     elif c == 1:
         return numpy.sin(numpy.abs(C))
     elif c == 2:
